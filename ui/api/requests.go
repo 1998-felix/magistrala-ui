@@ -1159,3 +1159,15 @@ func (req deleteDashboardReq) validate() error {
 	}
 	return nil
 }
+
+type saveDashboardsReq struct {
+	token    string
+	Metadata string `json:"metadata"`
+}
+
+func (req saveDashboardsReq) validate() error {
+	if req.token == "" {
+		return errAuthorization
+	}
+	return nil
+}
