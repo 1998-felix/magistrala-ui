@@ -41,7 +41,7 @@ type config struct {
 	TLSVerification bool            `env:"MG_UI_VERIFICATION_TLS" envDefault:"false"`
 }
 
-const envPrefix = "MG_UI_DB_"
+const envDBPrefix = "MG_UI_DB_"
 
 func main() {
 	cfg := config{}

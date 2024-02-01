@@ -2025,6 +2025,7 @@ func viewDashboardEndpoint(svc ui.Service) endpoint.Endpoint {
 		if err != nil {
 			return nil, err
 		}
+
 		return uiRes{
 			code: http.StatusOK,
 			html: res,

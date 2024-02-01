@@ -1157,15 +1157,33 @@ func (req deleteDashboardReq) validate() error {
 	if req.token == "" {
 		return errAuthorization
 	}
+	if req.page == 0 {
+		return errPageSize
+	}
 	return nil
 }
 
-type saveDashboardsReq struct {
-	token    string
-	Metadata string `json:"metadata"`
+type updateDashboardReq struct {
+	token       string
+	DashboardID string `json:"dashboard_id"`
+	Description string `json:"description"`
+	Metadata    string `json:"metadata"`
+	Layout      string `json:"layout"`
 }
 
-func (req saveDashboardsReq) validate() error {
+func (req updateDashboardReq) validate() error {
+	if req.token == "" {
+		return errAuthorization
+	}
+	return nil
+}
+
+type deleteDashboardReq struct {
+	token       string
+	DashboardID string `json:"dashboard_id"`
+}
+
+func (req deleteDashboardReq) validate() error {
 	if req.token == "" {
 		return errAuthorization
 	}
