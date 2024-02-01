@@ -1179,6 +1179,37 @@ func (req updateDashboardReq) validate() error {
 }
 
 type deleteDashboardReq struct {
+	token string
+	ID    string `json:"id"`
+}
+
+func (req deleteDashboardReq) validate() error {
+	if req.token == "" {
+		return errAuthorization
+	}
+	if req.page == 0 {
+		return errPageSize
+	}
+	return nil
+}
+
+type updateDashboardReq struct {
+	token         string
+	DashboardID   string `json:"dashboard_id"`
+	DashboardName string `json:"dashboard_name"`
+	Description   string `json:"description"`
+	Metadata      string `json:"metadata"`
+	Layout        string `json:"layout"`
+}
+
+func (req updateDashboardReq) validate() error {
+	if req.token == "" {
+		return errAuthorization
+	}
+	return nil
+}
+
+type deleteDashboardReq struct {
 	token       string
 	DashboardID string `json:"dashboard_id"`
 }
