@@ -4,7 +4,7 @@
 version: "3.7"
 
 networks:
-  magistrala-base-net:
+  magistrala-ui-net:
     driver: bridge
 
 volumes:
@@ -13,12 +13,12 @@ volumes:
 services:
   ui:
     image: magistrala/ui:${MG_RELEASE_TAG}
-    container_name: magistrala-ui
+    container_name: magistrala-ui-standalone
     restart: on-failure
     ports:
       - ${MG_UI_PORT}:${MG_UI_PORT}
     networks:
-      - magistrala-base-net
+      - magistrala-ui-net
     environment:
       MG_UI_LOG_LEVEL: ${MG_UI_LOG_LEVEL}
       MG_UI_PORT: ${MG_UI_PORT}
