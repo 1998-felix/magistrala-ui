@@ -13,7 +13,6 @@ import (
 	"html/template"
 	"log"
 	"math"
-	"math/rand"
 	"reflect"
 	"strings"
 	"sync"
