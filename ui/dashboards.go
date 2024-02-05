@@ -42,7 +42,7 @@ type DashboardReq struct {
 	DashboardName string `json:"dashboard_name,omitempty"`
 	Description   string `json:"description,omitempty"`
 	Metadata      string `json:"metadata,omitempty"`
-	Layout        string `json:"layout,omitempty"`
+	Layout        string `json:"layout"`
 }
 
 type DashboardRepository interface {
