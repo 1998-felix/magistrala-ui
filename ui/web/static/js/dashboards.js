@@ -4,21 +4,8 @@ var grid;
 var gridClass = ".grid";
 var localStorageKey = "gridState";
 
-function initGrid() {
-  var savedLayout = window.localStorage.getItem(localStorageKey);
-  if (savedLayout) {
-    loadLayout(savedLayout);
-  } else {
-    grid = new Muuri(gridClass, {
-      dragEnabled: true,
-      dragHandle: ".item-content",
-    });
-  }
 
-  return grid;
-}
-
-function saveLayout() {
+function saveLayout(grid,id) {
   const itemData = grid.getItems().map((item) => ({
     innerHTML: item._element.innerHTML,
     widgetID: item._element.children[1].children[0].id,
@@ -42,8 +29,17 @@ function saveLayout() {
     }
     return value;
   });
-
-  localStorage.setItem(localStorageKey, jsonString);
+  console.log("This is the id",id)
+  fetch('http://localhost:9096/dashboards', {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({"id": id, "layout": jsonString}),
+  });
+  // Save the JSON string to local storage
+  console.log("Saving layout to local storage")
+  // localStorage.setItem(localStorageKey, jsonString);
 }
 
 function loadLayout(savedLayout) {
@@ -168,14 +164,14 @@ const resizeObserver = new ResizeObserver((entries) => {
 });
 
 // Save the grid layout
-function saveGrid(grid) {
+function saveGrid(grid, id) {
   grid._settings.dragEnabled = false;
   document.querySelectorAll("#removeItem").forEach((item) => {
     item.classList.add("no-opacity");
     item.disabled = true;
   });
-  saveLayout(grid, localStorageKey);
-  window.location.reload();
+  saveLayout(grid, id);
+ //  window.location.reload();
 }
 
 // Cancel the grid layout

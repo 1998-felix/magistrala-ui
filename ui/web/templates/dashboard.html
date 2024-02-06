@@ -147,12 +147,27 @@ SPDX-License-Identifier: Apache-2.0 -->
         }
 
         function saveCanvas() {
-          saveGrid(grid);
+          saveGrid(grid, '{{ .Dashboard.ID }}');
         }
 
         function cancelEdit() {
           cancelEditGrid(grid);
         }
+
+        function initGrid() {
+          var savedLayout = '{{ .Dashboard.Layout }}';  
+          if (savedLayout) {
+            loadLayout(savedLayout);
+          } else {
+            grid = new Muuri(gridClass, {
+              dragEnabled: true,
+              dragHandle: ".item-content",
+            });
+          }
+
+          return grid;
+        }
+
       </script>
     </body>
   </html>
