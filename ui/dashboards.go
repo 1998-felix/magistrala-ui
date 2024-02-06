@@ -38,12 +38,6 @@ type DashboardReq struct {
 	Layout      string `json:"layout"`
 }
 
-type DashboardReq struct {
-	DashboardName string `json:"dashboard_name,omitempty"`
-	Description   string `json:"description,omitempty"`
-	Metadata      string `json:"metadata,omitempty"`
-	Layout        string `json:"layout"`
-}
 
 type DashboardRepository interface {
 	// Persists dashboard  for a user. A non-nil error is returned to indicate
